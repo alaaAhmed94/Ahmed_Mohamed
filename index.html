@@ -1,0 +1,1394 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahmed Mohamed Hashem — CV</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --gold: #c9a84c;
+        --gold-light: #e8c97a;
+        --gold-dim: #8b6914;
+        --navy: #0b1724;
+        --navy-mid: #152032;
+        --navy-card: #1c2d40;
+        --cream: #f6f2eb;
+        --cream-dark: #ede5d4;
+        --text: #1a1a1a;
+        --muted: #666;
+        --white: #fff;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--navy);
+        overflow-x: hidden;
+      }
+
+      /* LOADER */
+      #loader {
+        position: fixed;
+        inset: 0;
+        background: var(--navy);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .loader-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 42px;
+        font-weight: 700;
+        color: var(--white);
+        opacity: 0;
+        animation: fadeUp 0.8s 0.3s forwards;
+      }
+      .loader-line {
+        width: 0;
+        height: 2px;
+        background: linear-gradient(to right, var(--gold), var(--gold-light));
+        animation: expandLine 1s 0.9s forwards;
+      }
+      .loader-sub {
+        font-size: 12px;
+        letter-spacing: 4px;
+        color: rgba(255, 255, 255, 0.4);
+        opacity: 0;
+        animation: fadeUp 0.6s 1.3s forwards;
+        text-transform: uppercase;
+      }
+      @keyframes expandLine {
+        to {
+          width: 200px;
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* PARTICLES */
+      #particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--gold);
+        opacity: 0;
+        animation: floatP linear infinite;
+      }
+      @keyframes floatP {
+        0% {
+          opacity: 0;
+          transform: translateY(100vh) scale(0);
+        }
+        10% {
+          opacity: 0.3;
+        }
+        90% {
+          opacity: 0.08;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-10vh) scale(1.5);
+        }
+      }
+
+      ::-webkit-scrollbar {
+        width: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--navy);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold);
+        border-radius: 2px;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        background: var(--navy);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -200px;
+        right: -100px;
+        width: 600px;
+        height: 600px;
+        border: 1px solid rgba(201, 168, 76, 0.07);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 50px;
+        left: 30%;
+        width: 300px;
+        height: 300px;
+        border: 1px solid rgba(201, 168, 76, 0.05);
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .hero-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 80px 60px 80px 80px;
+        opacity: 0;
+        animation: slideRight 0.9s 2s forwards;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(201, 168, 76, 0.35);
+        color: var(--gold-light);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        padding: 8px 18px;
+        border-radius: 2px;
+        width: fit-content;
+        margin-bottom: 28px;
+        animation: pulse 3s 3s infinite;
+      }
+      .hero-badge-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: blink 1.5s infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.2;
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+        }
+        50% {
+          box-shadow: 0 0 0 8px rgba(201, 168, 76, 0.06);
+        }
+      }
+
+      .hero-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(44px, 5vw, 68px);
+        font-weight: 700;
+        color: var(--white);
+        line-height: 1.05;
+        margin-bottom: 10px;
+      }
+      .hero-name span {
+        color: transparent;
+        -webkit-text-stroke: 1.5px var(--gold);
+        display: block;
+      }
+      .hero-title {
+        font-size: 14px;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.5px;
+        margin-bottom: 36px;
+        line-height: 1.8;
+      }
+      .hero-tags {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 44px;
+      }
+      .hero-tag {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 6px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s;
+        cursor: default;
+      }
+      .hero-tag:hover {
+        background: rgba(201, 168, 76, 0.12);
+        border-color: var(--gold);
+        color: var(--gold-light);
+      }
+
+      .hero-contacts {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .hero-contact {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 13px;
+        font-weight: 400;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .hero-contact:hover {
+        color: var(--gold-light);
+      }
+      .hero-contact-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid rgba(201, 168, 76, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.3s;
+      }
+      .hero-contact:hover .hero-contact-icon {
+        background: rgba(201, 168, 76, 0.1);
+        border-color: var(--gold);
+      }
+      .hero-contact-icon svg {
+        width: 15px;
+        height: 15px;
+        stroke: var(--gold);
+        fill: none;
+        stroke-width: 1.8;
+      }
+
+      .hero-right {
+        position: relative;
+        overflow: hidden;
+        opacity: 0;
+        animation: slideLeft 0.9s 2.1s forwards;
+      }
+      .hero-right::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(to right, var(--navy) 0%, transparent 40%),
+          linear-gradient(to top, var(--navy) 0%, transparent 40%);
+        z-index: 2;
+      }
+      .hero-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        filter: grayscale(20%) contrast(1.05);
+      }
+      .hero-overlay-card {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        z-index: 3;
+        background: rgba(12, 22, 36, 0.88);
+        border: 1px solid rgba(201, 168, 76, 0.22);
+        backdrop-filter: blur(8px);
+        padding: 18px 24px;
+        border-radius: 6px;
+        animation: floatCard 4s ease-in-out 3s infinite;
+      }
+      @keyframes floatCard {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      .overlay-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 38px;
+        font-weight: 700;
+        color: var(--gold-light);
+        line-height: 1;
+      }
+      .overlay-label {
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.4);
+        letter-spacing: 1.5px;
+        margin-top: 4px;
+        text-transform: uppercase;
+      }
+
+      @keyframes slideRight {
+        from {
+          opacity: 0;
+          transform: translateX(-40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      @keyframes slideLeft {
+        from {
+          opacity: 0;
+          transform: translateX(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* SECTIONS */
+      .sw {
+        padding: 100px 80px;
+      }
+      .sw.alt {
+        background: var(--navy-mid);
+      }
+
+      .sh {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 16px;
+      }
+      .sh-label {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--gold);
+        white-space: nowrap;
+      }
+      .sh-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          rgba(201, 168, 76, 0.4),
+          transparent
+        );
+      }
+      .big-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(32px, 4vw, 50px);
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 8px;
+      }
+      .sub-title {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.35);
+        font-weight: 300;
+        margin-bottom: 52px;
+      }
+
+      /* ABOUT */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+      .about-text {
+        font-size: 15px;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 300;
+      }
+      .about-text strong {
+        color: var(--gold-light);
+        font-weight: 500;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .stat-card {
+        background: var(--navy-card);
+        border: 1px solid rgba(201, 168, 76, 0.1);
+        border-radius: 10px;
+        padding: 24px;
+        text-align: center;
+        transition: all 0.4s;
+        cursor: default;
+        border-bottom: 3px solid transparent;
+      }
+      .stat-card:hover {
+        border-bottom-color: var(--gold);
+        transform: translateY(-5px);
+      }
+      .stat-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 46px;
+        font-weight: 700;
+        color: var(--gold-light);
+        line-height: 1;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 6px;
+        letter-spacing: 0.5px;
+      }
+
+      /* ROLES */
+      .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+      .role-card {
+        background: var(--navy-card);
+        border: 1px solid rgba(201, 168, 76, 0.1);
+        border-radius: 14px;
+        padding: 36px 28px;
+        text-align: center;
+        transition: all 0.4s;
+        cursor: default;
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      .role-card.vis {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .role-card:hover {
+        box-shadow:
+          0 0 0 1px var(--gold),
+          0 24px 60px rgba(201, 168, 76, 0.08);
+      }
+      .role-icon {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        background: rgba(201, 168, 76, 0.09);
+        border: 1px solid rgba(201, 168, 76, 0.22);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        transition: all 0.4s;
+      }
+      .role-card:hover .role-icon {
+        background: rgba(201, 168, 76, 0.18);
+        transform: rotate(6deg) scale(1.07);
+      }
+      .role-icon svg {
+        width: 28px;
+        height: 28px;
+        stroke: var(--gold);
+        fill: none;
+        stroke-width: 1.6;
+      }
+      .role-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 6px;
+      }
+      .role-sub {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.3px;
+      }
+
+      /* TIMELINE */
+      .timeline {
+        position: relative;
+        padding-left: 44px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: linear-gradient(to bottom, var(--gold), transparent);
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 52px;
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.6s,
+          transform 0.6s;
+      }
+      .tl-item.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .tl-dot {
+        position: absolute;
+        left: -38px;
+        top: 8px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--navy);
+        border: 2px solid var(--gold);
+        transition: all 0.4s;
+      }
+      .tl-item:hover .tl-dot {
+        background: var(--gold);
+        box-shadow: 0 0 0 7px rgba(201, 168, 76, 0.12);
+      }
+      .tl-item.current .tl-dot {
+        background: var(--gold);
+        animation: ringPulse 2s infinite;
+      }
+      @keyframes ringPulse {
+        0%,
+        100% {
+          box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.45);
+        }
+        50% {
+          box-shadow: 0 0 0 12px rgba(201, 168, 76, 0);
+        }
+      }
+
+      .tl-card {
+        background: var(--navy-card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 28px 32px;
+        transition: all 0.4s;
+        border-left: 3px solid transparent;
+      }
+      .tl-item:hover .tl-card,
+      .tl-item.current .tl-card {
+        border-left-color: var(--gold);
+      }
+      .tl-item:hover .tl-card {
+        transform: translateX(6px);
+      }
+
+      .tl-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 6px;
+      }
+      .tl-company {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .tl-date {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--navy);
+        background: var(--gold);
+        padding: 5px 14px;
+        border-radius: 2px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-top: 4px;
+      }
+      .tl-date.active {
+        background: #1a7a45;
+        color: var(--white);
+      }
+      .tl-role {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+      }
+      .tl-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .tl-list li {
+        font-size: 13.5px;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.75;
+        padding-left: 18px;
+        position: relative;
+      }
+      .tl-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        width: 5px;
+        height: 5px;
+        background: var(--gold);
+        border-radius: 50%;
+      }
+
+      /* SKILLS */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+        gap: 22px;
+      }
+      .skill-card {
+        background: var(--navy-card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 28px;
+        transition: all 0.4s;
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      .skill-card.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .skill-card:hover {
+        box-shadow:
+          0 20px 60px rgba(0, 0, 0, 0.25),
+          0 0 0 1px rgba(201, 168, 76, 0.18);
+      }
+      .sk-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: rgba(201, 168, 76, 0.09);
+        border: 1px solid rgba(201, 168, 76, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 18px;
+      }
+      .sk-icon svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--gold);
+        fill: none;
+        stroke-width: 1.8;
+      }
+      .sk-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--white);
+        margin-bottom: 14px;
+      }
+      .sk-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .sk-tag {
+        font-size: 11.5px;
+        font-weight: 500;
+        padding: 5px 12px;
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        color: rgba(255, 255, 255, 0.55);
+        transition: all 0.3s;
+      }
+      .sk-tag:hover {
+        background: rgba(201, 168, 76, 0.1);
+        border-color: rgba(201, 168, 76, 0.28);
+        color: var(--gold-light);
+      }
+
+      /* LANGUAGES */
+      .lang-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+      }
+      .lang-card {
+        background: var(--navy-card);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 32px;
+        text-align: center;
+        transition: transform 0.4s;
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      .lang-card.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .lang-card:hover {
+        transform: translateY(-6px);
+      }
+      .lang-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 30px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 6px;
+      }
+      .lang-level {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 600;
+        margin-bottom: 22px;
+      }
+      .ring-wrap {
+        position: relative;
+        width: 88px;
+        height: 88px;
+        margin: 0 auto;
+      }
+      .ring-wrap svg {
+        width: 88px;
+        height: 88px;
+        transform: rotate(-90deg);
+      }
+      .ring-bg {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.07);
+        stroke-width: 5;
+      }
+      .ring-fill {
+        fill: none;
+        stroke: var(--gold);
+        stroke-width: 5;
+        stroke-linecap: round;
+        stroke-dasharray: 245;
+        stroke-dashoffset: 245;
+        transition: stroke-dashoffset 1.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      .ring-pct {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--white);
+      }
+
+      /* REVEAL */
+      .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .reveal.vis {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--navy);
+        border-top: 1px solid rgba(201, 168, 76, 0.14);
+        padding: 40px 80px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .ft-name {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--white);
+      }
+      .ft-bar {
+        width: 50px;
+        height: 1px;
+        background: var(--gold);
+      }
+      .ft-copy {
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.22);
+        letter-spacing: 1px;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .hero-right {
+          height: 360px;
+        }
+        .hero-left {
+          padding: 60px 32px;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .sw {
+          padding: 70px 28px;
+        }
+        footer {
+          flex-direction: column;
+          gap: 14px;
+          padding: 30px;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loader">
+      <div class="loader-name">Ahmed Hashem</div>
+      <div class="loader-line"></div>
+      <div class="loader-sub">Audio Platform Specialist</div>
+    </div>
+
+    <div id="particles"></div>
+
+    <div class="page" id="page" style="opacity: 0; transition: opacity 0.7s">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-left">
+          <div class="hero-badge">
+            <div class="hero-badge-dot"></div>
+            Available for Hire
+          </div>
+          <div class="hero-name">
+            Ahmed Mohamed
+            <span>Hashem</span>
+          </div>
+          <div class="hero-title">
+            Audio Platform Specialist &nbsp;·&nbsp; Community & Operations<br />
+            ACM &nbsp;·&nbsp; VIP Management &nbsp;·&nbsp; Business Development
+          </div>
+          <div class="hero-tags">
+            <span class="hero-tag">+2 Years Experience</span>
+            <span class="hero-tag">Live Audio Rooms</span>
+            <span class="hero-tag">Community Growth</span>
+            <span class="hero-tag">Platform Operations</span>
+          </div>
+          <div class="hero-contacts">
+            <a href="tel:01070617637" class="hero-contact">
+              <div class="hero-contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.18 1.23a2 2 0 012.18-2A17 17 0 016 0a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14z"
+                  />
+                </svg>
+              </div>
+              01070617637
+            </a>
+            <a href="mailto:Ahmedshrkawoe@gmail.com" class="hero-contact">
+              <div class="hero-contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M2 7l10 7 10-7" />
+                </svg>
+              </div>
+              Ahmedshrkawoe@gmail.com
+            </a>
+            <div class="hero-contact">
+              <div class="hero-contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <path
+                    d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20M2 12h20"
+                  />
+                </svg>
+              </div>
+              Cairo, Egypt
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <img
+            class="hero-photo"
+            src="/WhatsApp Image 2026-04-22 at 8.12.27 PM.jpeg"
+            alt="Ahmed Mohamed Hashem"
+          />
+          <div class="hero-overlay-card">
+            <div class="overlay-num">2+</div>
+            <div class="overlay-label">Years Experience</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="sw alt">
+        <div class="sh reveal">
+          <span class="sh-label">01 — About</span>
+          <div class="sh-line"></div>
+        </div>
+        <div class="big-title reveal">Who I Am</div>
+        <div class="sub-title reveal">
+          Results-driven professional with a passion for audio communities
+        </div>
+        <div class="about-grid">
+          <div class="about-text reveal">
+            Results-driven <strong>Audio Platform Specialist</strong> with over
+            2 years of hands-on experience managing live audio rooms, moderating
+            communities, and delivering high-quality user support across
+            multiple leading platforms.<br /><br />
+            Skilled at <strong>enhancing user engagement</strong>, optimizing
+            platform performance, and building thriving active communities.
+            Proven track record in <strong>ACM, VIP management</strong>, and
+            <strong>Business Development</strong> — known for strong
+            communication, reliability, and a proactive approach to
+            problem-solving.
+          </div>
+          <div class="stats-grid reveal">
+            <div class="stat-card">
+              <div class="stat-num" data-count="2">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num" data-count="3">0</div>
+              <div class="stat-label">Platforms Mastered</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num" data-count="4">0</div>
+              <div class="stat-label">Roles Held</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num">✓</div>
+              <div class="stat-label">Currently Active</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TARGET ROLES -->
+      <section class="sw">
+        <div class="sh reveal">
+          <span class="sh-label">02 — Target Roles</span>
+          <div class="sh-line"></div>
+        </div>
+        <div class="big-title reveal">What I Do Best</div>
+        <div class="sub-title reveal">
+          Core specializations I bring to every platform
+        </div>
+        <div class="roles-grid">
+          <div class="role-card">
+            <div class="role-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div class="role-title">ACM</div>
+            <div class="role-sub">Audio Community Manager</div>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">
+              <svg viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                />
+              </svg>
+            </div>
+            <div class="role-title">VIP Management</div>
+            <div class="role-sub">Host & Elite User Operations</div>
+          </div>
+          <div class="role-card">
+            <div class="role-icon">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="20" x2="12" y2="10" />
+                <line x1="18" y1="20" x2="18" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="16" />
+              </svg>
+            </div>
+            <div class="role-title">BD</div>
+            <div class="role-sub">Business Development</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="sw alt">
+        <div class="sh reveal">
+          <span class="sh-label">03 — Experience</span>
+          <div class="sh-line"></div>
+        </div>
+        <div class="big-title reveal">Work Journey</div>
+        <div class="sub-title reveal">
+          Career timeline across top audio platforms
+        </div>
+        <div class="timeline">
+          <div class="tl-item current">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <div class="tl-company">Mico</div>
+                <div class="tl-date active">May 2026 — Present</div>
+              </div>
+              <div class="tl-role">Audio Platform Specialist</div>
+              <ul class="tl-list">
+                <li>
+                  Applying expertise in live audio community management and
+                  platform operations
+                </li>
+                <li>
+                  Developing advanced VIP and ACM strategies to drive platform
+                  growth
+                </li>
+                <li>
+                  Building and nurturing an engaged, high-quality user community
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <div class="tl-company">Waho</div>
+                <div class="tl-date">Dec 2024 — Jan 2026</div>
+              </div>
+              <div class="tl-role">Audio Platform Operator</div>
+              <ul class="tl-list">
+                <li>
+                  Managed platform operations and monitored technical
+                  performance continuously
+                </li>
+                <li>
+                  Provided technical support and resolved user issues fast and
+                  efficiently
+                </li>
+                <li>
+                  Maintained high work discipline and consistent performance
+                  standards
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <div class="tl-company">Demo</div>
+                <div class="tl-date">Apr 2024 — Nov 2024</div>
+              </div>
+              <div class="tl-role">
+                Business Developer & Audio Room Supervisor (ACM)
+              </div>
+              <ul class="tl-list">
+                <li>
+                  Supervised daily operations of audio rooms and ensured smooth
+                  performance
+                </li>
+                <li>
+                  Onboarded and trained new hosts to improve content quality
+                </li>
+                <li>
+                  Increased engagement by introducing new content ideas and room
+                  strategies
+                </li>
+                <li>
+                  Collaborated closely with teams to enhance the overall user
+                  experience
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="tl-top">
+                <div class="tl-company">Hago</div>
+                <div class="tl-date">Jan 2022 — 2024</div>
+              </div>
+              <div class="tl-role">
+                Social Media Ads Manager & Live Operations Monitor
+              </div>
+              <ul class="tl-list">
+                <li>
+                  Managed and monitored live audio sessions ensuring quality and
+                  policy compliance
+                </li>
+                <li>
+                  Built strong relationships with users to grow an active,
+                  engaging community
+                </li>
+                <li>
+                  Reported technical issues and user feedback to improve system
+                  performance
+                </li>
+                <li>
+                  Supported content moderation and ensured a safe, welcoming
+                  user environment
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="sw">
+        <div class="sh reveal">
+          <span class="sh-label">04 — Skills</span>
+          <div class="sh-line"></div>
+        </div>
+        <div class="big-title reveal">Core Competencies</div>
+        <div class="sub-title reveal">
+          Specialized skills built across multiple platforms
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="sk-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div class="sk-title">Community & Moderation</div>
+            <div class="sk-tags">
+              <span class="sk-tag">Community Management</span>
+              <span class="sk-tag">Live Audio Moderation</span>
+              <span class="sk-tag">Content Policy</span>
+              <span class="sk-tag">User Safety</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="sk-icon">
+              <svg viewBox="0 0 24 24">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+                <line x1="12" y1="17" x2="12" y2="21" />
+              </svg>
+            </div>
+            <div class="sk-title">Platform Operations</div>
+            <div class="sk-tags">
+              <span class="sk-tag">Audio Platform Tools</span>
+              <span class="sk-tag">Technical Support</span>
+              <span class="sk-tag">Performance Monitoring</span>
+              <span class="sk-tag">Issue Resolution</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="sk-icon">
+              <svg viewBox="0 0 24 24">
+                <line x1="12" y1="20" x2="12" y2="10" />
+                <line x1="18" y1="20" x2="18" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="16" />
+              </svg>
+            </div>
+            <div class="sk-title">Business Development</div>
+            <div class="sk-tags">
+              <span class="sk-tag">VIP Host Management</span>
+              <span class="sk-tag">User Onboarding</span>
+              <span class="sk-tag">Engagement Strategy</span>
+              <span class="sk-tag">Growth Tactics</span>
+            </div>
+          </div>
+          <div class="skill-card">
+            <div class="sk-icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"
+                />
+              </svg>
+            </div>
+            <div class="sk-title">Soft Skills</div>
+            <div class="sk-tags">
+              <span class="sk-tag">Communication</span>
+              <span class="sk-tag">Team Collaboration</span>
+              <span class="sk-tag">Problem Solving</span>
+              <span class="sk-tag">Reliability</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LANGUAGES -->
+      <section class="sw alt">
+        <div class="sh reveal">
+          <span class="sh-label">05 — Languages</span>
+          <div class="sh-line"></div>
+        </div>
+        <div class="big-title reveal">Communication</div>
+        <div class="sub-title reveal">Languages I speak and work in</div>
+        <div class="lang-grid">
+          <div class="lang-card">
+            <div class="lang-name">Arabic</div>
+            <div class="lang-level">Native</div>
+            <div class="ring-wrap">
+              <svg viewBox="0 0 88 88">
+                <circle class="ring-bg" cx="44" cy="44" r="38" />
+                <circle
+                  class="ring-fill"
+                  cx="44"
+                  cy="44"
+                  r="38"
+                  data-pct="100"
+                />
+              </svg>
+              <div class="ring-pct">100%</div>
+            </div>
+          </div>
+          <div class="lang-card">
+            <div class="lang-name">English</div>
+            <div class="lang-level">Good</div>
+            <div class="ring-wrap">
+              <svg viewBox="0 0 88 88">
+                <circle class="ring-bg" cx="44" cy="44" r="38" />
+                <circle
+                  class="ring-fill"
+                  cx="44"
+                  cy="44"
+                  r="38"
+                  data-pct="65"
+                />
+              </svg>
+              <div class="ring-pct">65%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="ft-name">Ahmed Mohamed Hashem</div>
+        <div class="ft-bar"></div>
+        <div class="ft-copy">ACM · VIP · BUSINESS DEVELOPMENT · CAIRO 2026</div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        const c = document.getElementById("particles");
+        for (let i = 0; i < 20; i++) {
+          const d = document.createElement("div");
+          d.className = "particle";
+          const s = Math.random() * 4 + 2;
+          d.style.cssText = `width:${s}px;height:${s}px;left:${Math.random() * 100}%;animation-duration:${Math.random() * 20 + 15}s;animation-delay:${Math.random() * 15}s;`;
+          c.appendChild(d);
+        }
+      })();
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          const l = document.getElementById("loader");
+          l.style.transition = "opacity .7s";
+          l.style.opacity = "0";
+          setTimeout(() => {
+            l.style.display = "none";
+            document.getElementById("page").style.opacity = "1";
+            init();
+          }, 700);
+        }, 2400);
+      });
+
+      function init() {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (!e.isIntersecting) return;
+              const el = e.target;
+              el.classList.add("vis");
+              el.querySelectorAll("[data-count]").forEach(countUp);
+              el.querySelectorAll(".ring-fill").forEach(animRing);
+              io.unobserve(el);
+            });
+          },
+          { threshold: 0.15 },
+        );
+
+        document
+          .querySelectorAll(
+            ".reveal,.tl-item,.skill-card,.role-card,.lang-card",
+          )
+          .forEach((el) => {
+            io.observe(el);
+            const r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight - 50) el.classList.add("vis");
+          });
+
+        document.querySelectorAll("[data-count]").forEach((el) => {
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight) countUp(el);
+        });
+      }
+
+      function countUp(el) {
+        if (el._counted) return;
+        el._counted = true;
+        const t = +el.dataset.count;
+        let c = 0;
+        const iv = setInterval(() => {
+          c += t / 40;
+          if (c >= t) {
+            c = t;
+            clearInterval(iv);
+          }
+          el.textContent = Math.floor(c) + "+";
+        }, 35);
+      }
+
+      function animRing(el) {
+        if (el._animated) return;
+        el._animated = true;
+        const pct = +el.dataset.pct;
+        const circ = 2 * Math.PI * 38;
+        setTimeout(() => {
+          el.style.strokeDashoffset = circ * (1 - pct / 100);
+        }, 100);
+      }
+
+      document
+        .querySelectorAll(".skill-card")
+        .forEach((c, i) => (c.style.transitionDelay = i * 0.1 + "s"));
+      document
+        .querySelectorAll(".role-card")
+        .forEach((c, i) => (c.style.transitionDelay = i * 0.13 + "s"));
+      document
+        .querySelectorAll(".lang-card")
+        .forEach((c, i) => (c.style.transitionDelay = i * 0.1 + "s"));
+    </script>
+  </body>
+</html>
